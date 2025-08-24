@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Functions (.NET 8 isolated)",
+      "type": "coreclr",
+      "request": "attach",
+      "preLaunchTask": "func: host start",
+      "processId": "${command:pickProcess}",
+      "justMyCode": false
+    }
+  ]
+}

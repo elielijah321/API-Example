@@ -1,0 +1,100 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "clean (functions)",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build (functions)",
+			"command": "dotnet",
+			"args": [
+				"build",
+				"API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"dependsOn": "clean (functions)",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "clean release (functions)",
+			"command": "dotnet",
+			"args": [
+				"clean",
+				"--configuration",
+				"Release",
+				"API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "publish (functions)",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				"--configuration",
+				"Release",
+				"API.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"type": "process",
+			"dependsOn": "clean release (functions)",
+			"problemMatcher": "$msCompile"
+		},
+        {
+			"label": "publish (local run)",
+			"command": "dotnet",
+			"args": [
+				"publish",
+				"API.csproj",
+				"-c",
+				"Debug",
+				"-r",
+				"osx-arm64",
+				"--self-contained",
+				"true",
+				"-o",
+				"./publish"
+			],
+			"type": "process",
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "func: host start",
+			"type": "shell",
+			"dependsOn": "publish (local run)",
+			"options": {
+				"cwd": "${workspaceFolder}/publish"
+			},
+			"command": "func start --port 7082 --no-build",
+			"isBackground": true,
+			"problemMatcher": {
+				"owner": "custom",
+				"pattern": [],
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": ".*Initializing worker.*|.*Starting worker process.*",
+					"endsPattern": ".*Worker process started and initialized.*|.*Host lock lease acquired.*"
+				}
+			}
+        }
+	]
+}
