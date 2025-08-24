@@ -266,3 +266,12 @@ __pycache__/
 
 
 secrets.json
+
+# Azure Functions publish output
+publish-azure/
+publish/
+*.zip
+
+# Azurite storage emulator files
+__azurite_db_*.json
+__blobstorage__/
