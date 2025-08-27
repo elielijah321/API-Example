@@ -24,7 +24,7 @@ namespace Project.Function
             // Create an object to return
             var result = new
             {
-                Message = "Hello EA, this is a test function (isolated, .NET 8)!",
+                Message = "Hello World, this is a test function (isolated, .NET 8)!",
                 Timestamp = DateTime.UtcNow,
                 Status = "Success"
             };
