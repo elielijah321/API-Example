@@ -5,8 +5,6 @@
     <OutputType>Exe</OutputType>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RuntimeIdentifier>osx-arm64</RuntimeIdentifier>
-    <SelfContained>true</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>
