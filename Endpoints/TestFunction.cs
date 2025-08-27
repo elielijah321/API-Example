@@ -15,18 +15,20 @@ namespace Project.Function
             _logger = logger;
         }
 
-        [Function("test")]
+        [Function("healthCheck")]
         public async Task<HttpResponseData> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "test")] HttpRequestData req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequestData req)
         {
-            _logger.LogInformation("Test function processed a request (isolated).");
+            _logger.LogInformation("Health check function processed a request (isolated).");
 
             // Create an object to return
             var result = new
             {
-                Message = "Hello EA, this is a test function (isolated, .NET 8)!",
+                Message = "API is healthy and running (isolated, .NET 8)!",
+                Service = "c-kitchen-api",
                 Timestamp = DateTime.UtcNow,
-                Status = "Success"
+                Status = "Healthy",
+                Version = "1.0.0"
             };
 
             return await ResponseHelper.OkObjectResult(req, result);
